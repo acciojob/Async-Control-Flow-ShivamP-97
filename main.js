@@ -4,8 +4,8 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 /**
  * Reads multiple CSV files and merges them into a single file.
- * @param {string[]} files
- * @param {string} outputFile
+ * @param {string[]} files - An array of file paths to read.
+ * @param {string} outputFile - The file path to write the merged data to.
  * @returns {Promise<void>}
  */
 async function mergeCsvFiles(files, outputFile) {
@@ -23,6 +23,7 @@ async function mergeCsvFiles(files, outputFile) {
       })
     );
 
+    // Maintain order: file1 → file2 → file3
     const mergedData = results.flat();
 
     if (mergedData.length === 0) {
@@ -40,15 +41,9 @@ async function mergeCsvFiles(files, outputFile) {
     });
 
     await csvWriter.writeRecords(mergedData);
-
   } catch (error) {
     throw new Error(`Error: ${error.message}`);
   }
 }
-
-mergeCsvFiles(
-  ['file1.csv', 'file2.csv', 'file3.csv'],
-  'output.csv'
-);
 
 module.exports = { mergeCsvFiles };
