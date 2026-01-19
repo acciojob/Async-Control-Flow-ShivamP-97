@@ -23,7 +23,7 @@ async function mergeCsvFiles(files, outputFile) {
       throw new Error("No data found");
     }
 
-    const headers = Object.keys(mergedData[0]).map(key => ({
+    const headers = Object.keys(results[0][0]).map(key => ({
       id: key,
       title: key
     }));
