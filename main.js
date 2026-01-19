@@ -2,12 +2,6 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-/**
- * Reads multiple CSV files and merges them into a single file.
- * @param {string[]} files - An array of file paths to read.
- * @param {string} outputFile - The file path to write the merged data to.
- * @returns {Promise<void>}
- */
 async function mergeCsvFiles(files, outputFile) {
   try {
     const results = await Promise.all(
@@ -23,7 +17,6 @@ async function mergeCsvFiles(files, outputFile) {
       })
     );
 
-    // Maintain order: file1 → file2 → file3
     const mergedData = results.flat();
 
     if (mergedData.length === 0) {
